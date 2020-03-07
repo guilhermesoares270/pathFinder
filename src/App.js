@@ -3,9 +3,15 @@ import logo from './logo.svg';
 import './App.css';
 import styled from 'styled-components';
 import LeafLetMap from './components/Map';
-import places from './data/coordinates';
-// console.log(places);
 import { departure } from './components/Departure';
+import amplitude from './algorithms/amplitude';
+// const res = amplitude('Bar da Priscila', 'Ari Calhas');
+const res = amplitude('Bar da Priscila', 'Adega do Robinho');
+if (typeof res === 'string') {
+  console.log(res);
+} else {
+  console.log(JSON.stringify(res));
+}
 
 function App() {
   return (
@@ -19,65 +25,11 @@ function App() {
                 <select className="form-control" value={'aaa'} onChange={() => 'aaa'}>
                   <option>Partida</option>
                   {departure('departure')}
-                  {/* <option value="1">Bar da Priscila</option>
-                  <option value="2">Praça São Cristovão</option>
-                  <option value="3">Padoca da Fiel</option>
-                  <option value="4">Izabelle Davi Doces e Bolo</option>
-                  <option value="5">Equipax Indústria</option>
-                  <option value="6">Giovana Restaurante</option>
-                  <option value="7">Delcafe Assessoria</option>
-                  <option value="8">Buffet Maria Clara</option>
-                  <option value="9">ICT - Inglês com Tecnologia</option>
-                  <option value="10">Mika Burgue's</option>
-                  <option value="11">Comida Caseira Pé da Serra</option>
-                  <option value="12">Restaurante Primavera</option>
-                  <option value="13">Colégio Dinâmico</option>
-                  <option value="14">ABA - Associação</option>
-                  <option value="15">Coifas Cruzeiro</option>
-                  <option value="16">AD - Cruzeiro Seg. Retiro</option>
-                  <option value="17">Adega do Robinho</option>
-                  <option value="18">Colégio Adventista</option>
-                  <option value="19">Le Talon</option>
-                  <option value="20">Igreja Evangelho Quadrangular</option>
-                  <option value="21">Delegacia Seccional</option>
-                  <option value="22">Ita Fortes</option>
-                  <option value="23">Ari Calhas</option>
-                  <option value="24">Bar e Mercearia do Zeze</option>
-                  <option value="25">Posp Lanches</option>
-                  <option value="26">Comercial Biondini</option>
-                  <option value="27">Galvão Baterias</option> */}
                 </select>
                 <br />
                 <select className="form-control">
                   <option> Chegada</option>
                   {departure('arrive')}
-                  {/* <option value="1">Bar da Priscila</option>
-                  <option value="2">Praça São Cristovão</option>
-                  <option value="3">Padoca da Fiel</option>
-                  <option value="4">Izabelle Davi Doces e Bolo</option>
-                  <option value="5">Equipax Indústria</option>
-                  <option value="6">Giovana Restaurante</option>
-                  <option value="7">Delcafe Assessoria</option>
-                  <option value="8">Buffet Maria Clara</option>
-                  <option value="9">ICT - Inglês com Tecnologia</option>
-                  <option value="10">Mika Burgue's</option>
-                  <option value="11">Comida Caseira Pé da Serra</option>
-                  <option value="12">Restaurante Primavera</option>
-                  <option value="13">Colégio Dinâmico</option>
-                  <option value="14">ABA - Associação</option>
-                  <option value="15">Coifas Cruzeiro</option>
-                  <option value="16">AD - Cruzeiro Seg. Retiro</option>
-                  <option value="17">Adega do Robinho</option>
-                  <option value="18">Colégio Adventista</option>
-                  <option value="19">Le Talon</option>
-                  <option value="20">Igreja Evangelho Quadrangular</option>
-                  <option value="21">Delegacia Seccional</option>
-                  <option value="22">Ita Fortes</option>
-                  <option value="23">Ari Calhas</option>
-                  <option value="24">Bar e Mercearia do Zeze</option>
-                  <option value="25">Posp Lanches</option>
-                  <option value="26">Comercial Biondini</option>
-                  <option value="27">Galvão Baterias</option> */}
                 </select>
                 <br />
                 <select className="form-control">
@@ -107,7 +59,6 @@ function App() {
         </div>
 
       </div>
-
     </div>
   );
 };

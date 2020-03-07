@@ -1,3 +1,34 @@
+/**
+ * @param {{}[]} coordinates
+ * @param {number} num 
+ */
+export const index = (coordinates, num) => {
+    // console.log(`YYY: ${num}`);
+    let res = null;
+    for (let i = 0; i < coordinates.length; i++) {
+        // console.log(`coordinates[${i}].number: ${coordinates[i].number} - t: ${typeof coordinates[i].number}`);
+        if (coordinates[i].number === (num + 1).toString()) {
+            res = i;
+            break;
+        }
+    };
+    // console.log(`IIIIIIII: ${res}`);
+    return res;
+};
+
+// /**
+//  * 
+//  * @param {string} name 
+//  */
+// export const indexName = name => {
+//     const ind = places.filter(x => x.name === name);
+//     if (ind.length === 0) return null;
+//     return ind[0];
+// };
+
+/**
+ * @type {{ number: number, name: string, x: string, y: string}[]}
+ */
 const places = [
     { "number": "1", "name": "Bar da Priscila", "x": "-22,555,293", "y": "-44,960,046" },
     { "number": "2", "name": "Praça São Cristovão", "x": "-22,556,462", "y": "-44,960,896" }
@@ -34,49 +65,49 @@ const places = [
     { "number": "26", "name": "Comerical Biondini", "x": "-22,558,761", "y": "-44,955,804" },
     { "number": "27", "name": "Galvão Baterias", "x": "-22,559,236", "y": "-44,955,497" }
     ,
-    { "number": "28", "name": "Esquina", "x": "-22,555,636", "y": "-44,962,902" },
-    { "number": "29", "name": "Esquina", "x": "-22,555,412", "y": "-44,962,300" },
-    { "number": "30", "name": "Esquina", "x": "-22,555,199", "y": "-44,961,723" },
-    { "number": "31", "name": "Esquina", "x": "-22,557,224", "y": "-44,961,519" },
-    { "number": "32", "name": "Esquina", "x": "-22,557,017", "y": "-44,960,954" },
-    { "number": "33", "name": "Esquina", "x": "-22,554,771", "y": "-44,960,927" },
-    { "number": "34", "name": "Esquina", "x": "-22,555,959", "y": "-44,960,876" },
-    { "number": "35", "name": "Esquina", "x": "-22,555,274", "y": "-44,959,366" },
-    { "number": "36", "name": "Esquina", "x": "-22,555,778", "y": "-44,959,714" },
-    { "number": "37", "name": "Esquina", "x": "-22,556,988", "y": "-44,960,783" },
-    { "number": "38", "name": "Esquina", "x": "-22,557,464", "y": "-44,962,104" },
-    { "number": "39", "name": "Esquina", "x": "-22,556,746", "y": "-44,959,066" },
-    { "number": "40", "name": "Esquina", "x": "-22,557,191", "y": "-44,958,753" },
-    { "number": "41", "name": "Esquina", "x": "-22,556,322", "y": "-44,958,820" },
-    { "number": "42", "name": "Esquina", "x": "-22,555,827", "y": "-44,958,495" },
-    { "number": "43", "name": "Esquina", "x": "-22,559,064", "y": "-44,961,429" },
-    { "number": "44", "name": "Esquina", "x": "-22,559,587", "y": "-44,961,231" },
-    { "number": "45", "name": "Esquina", "x": "-22,560,650", "y": "-44,960,765" },
-    { "number": "46", "name": "Esquina", "x": "-22,559,089", "y": "-44,963,134" },
-    { "number": "47", "name": "Esquina", "x": "-22,558,921", "y": "-44,963,289" },
-    { "number": "48", "name": "Esquina", "x": "-22,560,754", "y": "-44,959,337" },
-    { "number": "49", "name": "Esquina", "x": "-22,560,178", "y": "-44,959,513" },
-    { "number": "50", "name": "Esquina", "x": "-22,559,023", "y": "-44,957,522" },
-    { "number": "51", "name": "Esquina", "x": "-22,559,103", "y": "-44,957,453" },
-    { "number": "52", "name": "Esquina", "x": "-22,558,795", "y": "-44,956,941" },
-    { "number": "53", "name": "Esquina", "x": "-22,560,080", "y": "-44,956,941" },
-    { "number": "54", "name": "Esquina", "x": "-22,555,901", "y": "-44,962,791" },
-    { "number": "55", "name": "Esquina", "x": "-22,556,405", "y": "-44,962,575" },
-    { "number": "56", "name": "Esquina", "x": "-22,556,913", "y": "-44,962,337" },
-    { "number": "57", "name": "Esquina", "x": "-22,557,683", "y": "-44,960,988" },
-    { "number": "58", "name": "Esquina", "x": "-22,558,231", "y": "-44,960,801" },
-    { "number": "59", "name": "Esquina", "x": "-22,559,290", "y": "-44,960,342" },
-    { "number": "60", "name": "Esquina", "x": "-22,559,813", "y": "-44,960,102" },
-    { "number": "61", "name": "Esquina", "x": "-22,560,925", "y": "-44,961,502" },
-    { "number": "62", "name": "Esquina", "x": "-22,560,496", "y": "-44,961,961" },
-    { "number": "63", "name": "Esquina", "x": "-22,560,020", "y": "-44,962,280" },
-    { "number": "64", "name": "Esquina", "x": "-22,559,311", "y": "-44,963,035" },
-    { "number": "65", "name": "Esquina", "x": "-22,559,840", "y": "-44,962,625" },
-    { "number": "66", "name": "Esquina", "x": "-22,560,356", "y": "-44,962,299" },
-    { "number": "67", "name": "Esquina", "x": "-22,560,927", "y": "-44,961,973" },
-    { "number": "68", "name": "Esquina", "x": "-22,560,353", "y": "-44,959,936" },
-    { "number": "69", "name": "Esquina", "x": "-22,554,633", "y": "-44,960,515" },
-    { "number": "70", "name": "Esquina", "x": "-22,561,619", "y": "-44,961,566" }
+    { "number": "28", "name": "Esquina28", "x": "-22,555,636", "y": "-44,962,902" },
+    { "number": "29", "name": "Esquina29", "x": "-22,555,412", "y": "-44,962,300" },
+    { "number": "30", "name": "Esquina30", "x": "-22,555,199", "y": "-44,961,723" },
+    { "number": "31", "name": "Esquina31", "x": "-22,557,224", "y": "-44,961,519" },
+    { "number": "32", "name": "Esquina32", "x": "-22,557,017", "y": "-44,960,954" },
+    { "number": "33", "name": "Esquina33", "x": "-22,554,771", "y": "-44,960,927" },
+    { "number": "34", "name": "Esquina34", "x": "-22,555,959", "y": "-44,960,876" },
+    { "number": "35", "name": "Esquina35", "x": "-22,555,274", "y": "-44,959,366" },
+    { "number": "36", "name": "Esquina36", "x": "-22,555,778", "y": "-44,959,714" },
+    { "number": "37", "name": "Esquina37", "x": "-22,556,988", "y": "-44,960,783" },
+    { "number": "38", "name": "Esquina38", "x": "-22,557,464", "y": "-44,962,104" },
+    { "number": "39", "name": "Esquina39", "x": "-22,556,746", "y": "-44,959,066" },
+    { "number": "40", "name": "Esquina40", "x": "-22,557,191", "y": "-44,958,753" },
+    { "number": "41", "name": "Esquina41", "x": "-22,556,322", "y": "-44,958,820" },
+    { "number": "42", "name": "Esquina42", "x": "-22,555,827", "y": "-44,958,495" },
+    { "number": "43", "name": "Esquina43", "x": "-22,559,064", "y": "-44,961,429" },
+    { "number": "44", "name": "Esquina44", "x": "-22,559,587", "y": "-44,961,231" },
+    { "number": "45", "name": "Esquina45", "x": "-22,560,650", "y": "-44,960,765" },
+    { "number": "46", "name": "Esquina46", "x": "-22,559,089", "y": "-44,963,134" },
+    { "number": "47", "name": "Esquina47", "x": "-22,558,921", "y": "-44,963,289" },
+    { "number": "48", "name": "Esquina48", "x": "-22,560,754", "y": "-44,959,337" },
+    { "number": "49", "name": "Esquina49", "x": "-22,560,178", "y": "-44,959,513" },
+    { "number": "50", "name": "Esquina50", "x": "-22,559,023", "y": "-44,957,522" },
+    { "number": "51", "name": "Esquina51", "x": "-22,559,103", "y": "-44,957,453" },
+    { "number": "52", "name": "Esquina52", "x": "-22,558,795", "y": "-44,956,941" },
+    { "number": "53", "name": "Esquina53", "x": "-22,560,080", "y": "-44,956,941" },
+    { "number": "54", "name": "Esquina54", "x": "-22,555,901", "y": "-44,962,791" },
+    { "number": "55", "name": "Esquina55", "x": "-22,556,405", "y": "-44,962,575" },
+    { "number": "56", "name": "Esquina56", "x": "-22,556,913", "y": "-44,962,337" },
+    { "number": "57", "name": "Esquina57", "x": "-22,557,683", "y": "-44,960,988" },
+    { "number": "58", "name": "Esquina58", "x": "-22,558,231", "y": "-44,960,801" },
+    { "number": "59", "name": "Esquina59", "x": "-22,559,290", "y": "-44,960,342" },
+    { "number": "60", "name": "Esquina60", "x": "-22,559,813", "y": "-44,960,102" },
+    { "number": "61", "name": "Esquina61", "x": "-22,560,925", "y": "-44,961,502" },
+    { "number": "62", "name": "Esquina62", "x": "-22,560,496", "y": "-44,961,961" },
+    { "number": "63", "name": "Esquina63", "x": "-22,560,020", "y": "-44,962,280" },
+    { "number": "64", "name": "Esquina64", "x": "-22,559,311", "y": "-44,963,035" },
+    { "number": "65", "name": "Esquina65", "x": "-22,559,840", "y": "-44,962,625" },
+    { "number": "66", "name": "Esquina66", "x": "-22,560,356", "y": "-44,962,299" },
+    { "number": "67", "name": "Esquina67", "x": "-22,560,927", "y": "-44,961,973" },
+    { "number": "68", "name": "Esquina68", "x": "-22,560,353", "y": "-44,959,936" },
+    { "number": "69", "name": "Esquina69", "x": "-22,554,633", "y": "-44,960,515" },
+    { "number": "70", "name": "Esquina70", "x": "-22,561,619", "y": "-44,961,566" }
 ]
 
 export default places;
