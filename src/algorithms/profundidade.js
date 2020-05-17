@@ -25,9 +25,7 @@ const amplitude = (inicio, fim) => {
 
     let flag1 = false;
     while (!l1.vazio() && flag1 == false) {
-
-        let atual = l1.deletaPrimeiro();
-        //let atual = l1.deletaUltimo();  profundidade
+        let atual = l1.deletaUltimo();
         let ind = nos.indexOf(atual.valor1);
 
         for (let i = 0; i < grafo[ind].length; i++) {
@@ -60,16 +58,5 @@ const amplitude = (inicio, fim) => {
     else caminho = "Caminho não encontrado";
     return caminho;
 };
-
-// const nos = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "N", "O",
-//     "P", "R", "S", "T", "U", "V", "Z"]
-
-
-// const grafo = [
-//     ["Z", "T", "S"], ["U", "P", "G", "F"], ["R", "P", "D"],
-//     ["M", "C"], ["H"], ["S", "B"], ["B"], ["U", "E"], ["V", "N"],
-//     ["T", "M"], ["L", "D"], ["I"], ["Z", "S"], ["R", "C", "B"],
-//     ["S", "P", "C"], ["R", "O", "F", "A"], ["L", "A"],
-//     ["V", "H", "B"], ["U", "I"], ["O", "A"]];
 
 export default amplitude;

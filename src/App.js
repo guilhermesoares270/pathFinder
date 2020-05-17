@@ -5,13 +5,41 @@ import styled from 'styled-components';
 import LeafLetMap from './components/Map';
 import { departure } from './components/Departure';
 import amplitude from './algorithms/amplitude';
-// const res = amplitude('Bar da Priscila', 'Ari Calhas');
-const res = amplitude('Bar da Priscila', 'Adega do Robinho');
+import coordenadas, { getByName } from './data/coordinates';
+
+const res = amplitude('Bar da Priscila', 'Resturante Primavera');
+// const res = amplitude('Bar da Priscila', 'Adega do Robinho');
+
+console.log(`RES: ${JSON.stringify(res)}`);
+let coords = [];
+let ret = [];
 if (typeof res === 'string') {
   console.log(res);
 } else {
   console.log(JSON.stringify(res));
+  for (let i = 0; i < res.length; i++) {
+    ret.push(res[i]['name']);
+    // coords.push([
+    //   formatNumberString(coordenadas[i]['x']),
+    //   formatNumberString(coordenadas[i]['y'])
+    // ]);
+    // coords.push([
+    //   res[i]['x'],
+    //   res[i]['y']
+    // ]);
+
+    const data = getByName(res[i]);
+    const x = data.x;
+    const y = data.y;
+    coords.push([x, y]);
+  }
 }
+
+console.log(`LLL: ${JSON.stringify(coords)}`);
+// console.log(`format: ${formatNumberString()} - n: ${parseFloat(formatNumberString())}`);
+
+// console.log(`o: ${ret}`);
+// console.log(`coordinates:\n${JSON.stringify(coords)}\n`);
 
 function App() {
   return (
@@ -33,7 +61,7 @@ function App() {
                 </select>
                 <br />
                 <select className="form-control">
-                  <option> Algoritmo</option>
+                  <option>Algoritmo</option>
                   <option>Amplitude</option>
                   <option>Profundidade</option>
                   <option>Prof.Limitada</option>
@@ -55,7 +83,8 @@ function App() {
         </div>
 
         <div className="col-xl-9 col-md-12 col-sm-12" style={{ padding: '0' }}>
-          <LeafLetMap />
+          {/* <LeafLetMap /> */}
+          <LeafLetMap coords={coords} />
         </div>
 
       </div>

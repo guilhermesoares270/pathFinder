@@ -46,8 +46,10 @@ export const toGraph = () => {
         graph[i] = [];
         for (let j = 1; j <= Object.keys(matrix[i]).length; j++) {
             if (matrix[i][j] && matrix[i][j] != 0) {
-                // graph[i].push(parseInt(matrix[i][j]));
-                graph[i].push(nos[matrix[i][j]]);
+                // graph[i].push(nos[matrix[i][j]]);
+
+                graph[i].push(nos[j - 1]);
+                // console.log(`i: ${i} - j: ${j}`);
             }
         }
     }
