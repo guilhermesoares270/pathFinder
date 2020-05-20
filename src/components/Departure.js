@@ -5,7 +5,9 @@ export const departure = keySeed => (
     places.map(x => (
         <option
             key={keySeed + x.number}
-            value={x.number}>{x.name}
+            value={x.name}
+        >
+            {x.name}
         </option>
     ))
 );

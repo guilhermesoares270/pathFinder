@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import styled from 'styled-components';
@@ -6,74 +6,107 @@ import LeafLetMap from './components/Map';
 import { departure } from './components/Departure';
 import amplitude from './algorithms/amplitude';
 import coordenadas, { getByName } from './data/coordinates';
+import algorithms from './algorithms';
 
-const res = amplitude('Bar da Priscila', 'Resturante Primavera');
-// const res = amplitude('Bar da Priscila', 'Adega do Robinho');
+// const res = amplitude('Bar da Priscila', 'Resturante Primavera');
 
-console.log(`RES: ${JSON.stringify(res)}`);
-let coords = [];
-let ret = [];
-if (typeof res === 'string') {
-  console.log(res);
-} else {
-  console.log(JSON.stringify(res));
-  for (let i = 0; i < res.length; i++) {
-    ret.push(res[i]['name']);
-    // coords.push([
-    //   formatNumberString(coordenadas[i]['x']),
-    //   formatNumberString(coordenadas[i]['y'])
-    // ]);
-    // coords.push([
-    //   res[i]['x'],
-    //   res[i]['y']
-    // ]);
+const chooseAlgorithm = (select) => algorithms[select];
+const findCoords = (algorithm, partida, chegada) => {
+  console.log(`partida: ${partida}`);
+  console.log(`chegada: ${chegada}`);
+  const res = algorithm(partida, chegada);
+  let coords = [];
+  let ret = [];
+  if (typeof res === 'string') {
+    console.log(res);
+  } else {
+    console.log(JSON.stringify(res));
+    for (let i = 0; i < res.length; i++) {
+      ret.push(res[i]['name']);
 
-    const data = getByName(res[i]);
-    const x = data.x;
-    const y = data.y;
-    coords.push([x, y]);
+      const data = getByName(res[i]);
+      const x = data.x;
+      const y = data.y;
+      coords.push([x, y]);
+    }
   }
-}
+  return coords;
+};
+const renderMap = (select, partida, chegada) => {
+  let coords = [];
+  // if (select == 'unimplemented') alert('Esse algoritmo ainda não foi implementado');
+  const alg = chooseAlgorithm(select);
+  if (alg) coords = findCoords(alg, partida, chegada);
+  return <LeafLetMap coords={coords} />;
+};
 
-console.log(`LLL: ${JSON.stringify(coords)}`);
-// console.log(`format: ${formatNumberString()} - n: ${parseFloat(formatNumberString())}`);
+const App = () => {
+  const [selectValue, setSelectValue] = useState('empty');
+  const [partida, setPartida] = useState('empty');
+  const [chegada, setChegada] = useState('empty');
+  const [executar, setExecutar] = useState(false);
+  const [polyline, setPolyline] = useState(false);
 
-// console.log(`o: ${ret}`);
-// console.log(`coordinates:\n${JSON.stringify(coords)}\n`);
+  const isPolyline = (algType) => {
+    if (algType == 'unimplemented' || algType == 'empty') setPolyline(false);
+    else setPolyline(true);
+  };
 
-function App() {
+  useEffect(() => {
+    console.log(`poly: ${polyline}`);
+  }, [polyline]);
+
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-xl-3 col-md-12 col-sm-12" id="selector">
           <div className="col-xl-12">
             <div>
-              <form onSubmit={() => console.log('aaa')}>
+              <form>
                 <br />
-                <select className="form-control" value={'aaa'} onChange={() => 'aaa'}>
-                  <option>Partida</option>
+                <select
+                  id='partida'
+                  className="form-control"
+                  onChange={(e) => setPartida(e.currentTarget.value)}
+                >
+                  <option value='partida' >Partida</option>
                   {departure('departure')}
                 </select>
                 <br />
-                <select className="form-control">
-                  <option> Chegada</option>
+                <select
+                  id='chegada'
+                  className="form-control"
+                  onClick={(e) => setChegada(e.currentTarget.value)}
+                >
+                  <option value='chegada' >Chegada</option>
                   {departure('arrive')}
                 </select>
                 <br />
-                <select className="form-control">
-                  <option>Algoritmo</option>
-                  <option>Amplitude</option>
-                  <option>Profundidade</option>
-                  <option>Prof.Limitada</option>
-                  <option>Aprofundamento Iterativo</option>
-                  <option>Biderecional</option>
-                  <option>Custo Uniforme</option>
-                  <option>Greedy</option>
+                <select
+                  id='select-algorithm'
+                  className="form-control"
+                  onClick={(e) => setSelectValue(e.currentTarget.value)}
+                >
+                  <option value='empty' >Algoritmo</option>
+                  <option value='amplitude' >Amplitude</option>
+                  <option value='profundidade' >Profundidade</option>
+                  <option value='unimplemented' >Prof.Limitada</option>
+                  <option value='unimplemented' >Aprofundamento Iterativo</option>
+                  <option value='unimplemented' >Biderecional</option>
+                  <option value='unimplemented' >Custo Uniforme</option>
+                  <option value='unimplemented' >Greedy</option>
                 </select>
               </form>
               <br />
               <center>
-                <button type="button" className="btn btn-executa">
+                <button
+                  type="button"
+                  className="btn btn-executa"
+                  // onClick={() => setExecutar(true)}
+                  onClick={() => {
+                    isPolyline(selectValue)
+                  }}
+                >
                   <strong>Executar</strong>
                 </button>
               </center>
@@ -83,8 +116,18 @@ function App() {
         </div>
 
         <div className="col-xl-9 col-md-12 col-sm-12" style={{ padding: '0' }}>
-          {/* <LeafLetMap /> */}
-          <LeafLetMap coords={coords} />
+          {
+            polyline && selectValue != 'unimplemented' && selectValue != 'empty' && renderMap(selectValue, partida, chegada)
+          }
+          {
+            !polyline && selectValue == 'unimplemented' && selectValue == 'empty' &&
+            <>
+              {
+                alert('Algoritmo não implementado')
+              }
+              <LeafLetMap coords={null} />
+            </>
+          }
         </div>
 
       </div>
